@@ -3,3 +3,10 @@
 
 # Ada Library Information
 *.ali
+
+.gradle/
+.idea/
+app/build/
+build/
+openCVLibrary310/build/
+app/app.iml
