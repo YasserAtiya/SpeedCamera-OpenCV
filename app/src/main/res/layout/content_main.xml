@@ -11,7 +11,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="uk.co.apalis.myapplication.MainActivity"
+    tools:context="com.speeddemon.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <LinearLayout
@@ -113,6 +113,7 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/distanceButton"
             android:layout_alignParentStart="false"
+            android:layout_alignParentLeft="false"
             android:layout_toLeftOf="@+id/edgeSwitch"
             android:layout_toStartOf="@+id/edgeSwitch"
             android:layout_weight="0.595">
