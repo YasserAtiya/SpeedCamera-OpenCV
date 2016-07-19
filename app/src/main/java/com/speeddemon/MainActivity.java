@@ -30,6 +30,7 @@ import static org.opencv.imgproc.Imgproc.Canny;
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2
 {
+    //class var
     private JavaCameraView mOpenCvCameraView;
     private Mat edge;
     Sensor accelerometer;
