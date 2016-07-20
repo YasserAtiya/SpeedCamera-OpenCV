@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     SeekBar thresholdBar;
     int threshold;
     boolean checkDistance = true;
-    boolean checkHeight = false;
+    //boolean checkHeight = false;
     TextView tv;
     long refreshRate, previousTime;
 
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         // speedOutput = (TextView) findViewById(R.id.speedOutput);
         distanceOutput = (TextView) findViewById(R.id.distanceOutput);
         distanceButton = (Button) findViewById(R.id.distanceButton);
-        heightOutput = (TextView) findViewById(R.id.heightOutput);
-        heightButton = (Button) findViewById(R.id.heightButton);
+        //heightOutput = (TextView) findViewById(R.id.heightOutput);
+        //heightButton = (Button) findViewById(R.id.heightButton);
         resetTimeBtn = (Button) findViewById(R.id.btnResetTime);
         thresholdBar = (SeekBar) findViewById(R.id.thresholdBar);
         heightAngleOutput = (TextView) findViewById(R.id.heightAngle);
@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                     distanceOutput.setText(distance + "m");
                     distanceAngleOutput.setText("Angle: " + distanceAngle);
                 }
+
+                /*
                 if(checkHeight)
                 {
                     height = getHeight();
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                     heightAngleOutput.setText("Angle: " + heightAngle);
 
                 }
+                */
 
                 //speedOutput.setText(getSpeed() + " m/s");
 
@@ -170,13 +173,15 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             @Override
             public void onClick(View v)
             {
-                checkDistance = false;
-                checkHeight = true;
-                heightOutput.setTypeface(null, Typeface.NORMAL);
-                heightButton.setVisibility(View.VISIBLE);
+
+                //checkDistance = false;
+                //checkHeight = true;
+                //heightOutput.setTypeface(null, Typeface.NORMAL);
+                //heightButton.setVisibility(View.VISIBLE);
             }
         });
 
+        /*
         heightButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -185,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 checkHeight = false;
             }
         });
+        */
 
         resetTimeBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -376,6 +382,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         return Math.round(((phoneHeight * tanAngle) - 0.1) * 100.0) / 100.0;
     }
 
+    /*
     private double getHeight()
     {
 
@@ -398,6 +405,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         return round(c,2);
     }
+    */
+
 
     private double round(double d, int decimals)
     {
