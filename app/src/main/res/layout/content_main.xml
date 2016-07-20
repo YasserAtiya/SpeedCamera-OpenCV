@@ -78,15 +78,17 @@
                 android:layout_alignParentStart="true"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
-                android:id="@+id/textView4"
-                android:layout_below="@+id/btnDist2"
+                android:text="dx"
+                android:id="@+id/dxView"
+                android:layout_below="@+id/dist2View"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal"
+                android:textSize="20sp" />
 <!--
             <TextView
                 android:layout_width="wrap_content"
@@ -207,7 +209,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Speed:"
                     android:id="@+id/STATICSPEEDLABEL"
-                    android:layout_below="@+id/textView4"
+                    android:layout_below="@+id/dxView"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp" />
@@ -249,7 +251,7 @@
                 android:layout_alignRight="@+id/edgeSwitch"
                 android:layout_alignEnd="@+id/edgeSwitch"
                 android:gravity="center_horizontal" />
-
+<!--
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -260,16 +262,17 @@
                 android:layout_alignEnd="@+id/textView3"
                 android:text="Set Distance"
                 android:textStyle="italic"/>
-
+-->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Angle: "
-                android:id="@+id/heightAngle"
-                android:layout_below="@+id/heightOutput"
+                android:text="Intial Time"
+                android:id="@+id/initialTime"
                 android:layout_alignRight="@+id/textView3"
-                android:layout_alignEnd="@+id/textView3"/>
+                android:layout_alignEnd="@+id/textView3"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/textView3" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -277,7 +280,7 @@
                 android:text="Reset Time"
                 android:id="@+id/btnResetTime"
                 android:textSize="10dp"
-                android:layout_below="@+id/dt"
+                android:layout_below="@+id/dtView"
                 android:layout_centerHorizontal="true" />
 
             <Button
@@ -285,7 +288,7 @@
                 android:layout_height="wrap_content"
                 android:text="Set Time 1"
                 android:id="@+id/btnTime1"
-                android:layout_below="@+id/heightAngle"
+                android:layout_below="@+id/initialTime"
                 android:layout_centerHorizontal="true" />
 
             <Button
@@ -310,7 +313,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="dt"
-                android:id="@+id/dt"
+                android:id="@+id/dtView"
                 android:layout_below="@+id/changeTimeMsg"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
