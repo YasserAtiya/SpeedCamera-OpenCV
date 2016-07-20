@@ -31,15 +31,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat edge;
     Sensor accelerometer;
     SensorManager sm;
-    TextView distanceOutput, heightOutput, distanceAngleOutput, initialTimeOutput, speedOutput;
+    TextView distanceOutput, distanceAngleOutput, initialTimeOutput;
     double phoneHeight = 1.22;
-    double x, y, z, distance, height, distanceAngle, heightAngle, previousPosition, currentPosition;
-    Button distanceButton, heightButton;
+    double x, y, z, distance, distanceAngle;
     SeekBar thresholdBar;
     int threshold;
     boolean checkDistance = true;
-    //boolean checkHeight = false;
-    //TextView tv;
     long refreshRate, previousTime;
 
 
@@ -78,20 +75,15 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
 
-        // speedOutput = (TextView) findViewById(R.id.speedOutput);
         distanceOutput = (TextView) findViewById(R.id.distanceOutput);
-        //distanceButton = (Button) findViewById(R.id.btnResetDist);
-        //heightOutput = (TextView) findViewById(R.id.heightOutput);
-        //heightButton = (Button) findViewById(R.id.heightButton);
-        resetTimeBtn = (Button) findViewById(R.id.btnResetTime);
         thresholdBar = (SeekBar) findViewById(R.id.thresholdBar);
-        initialTimeOutput = (TextView) findViewById(R.id.initialTime);
         distanceAngleOutput = (TextView) findViewById(R.id.distanceAngle);
-        //tv = (TextView) findViewById(R.id.textView4);
 
         // Time Objects
         time1Button = (Button) findViewById(R.id.btnTime1);
         time2Button = (Button) findViewById(R.id.btnTime2);
+        resetTimeBtn = (Button) findViewById(R.id.btnResetTime);
+        initialTimeOutput = (TextView) findViewById(R.id.initialTime);
         dtView = (TextView) findViewById(R.id.dtView);
 
         // Dist Objects
@@ -129,18 +121,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                     distanceAngleOutput.setText("Angle: " + distanceAngle);
                 }
 
-                /*
-                if(checkHeight)
-                {
-                    height = getHeight();
-                    heightOutput.setText(height + "m");
-                    heightAngleOutput.setText("Angle: " + heightAngle);
-
-                }
-                */
-
-                //speedOutput.setText(getSpeed() + " m/s");
-
             }
 
             @Override
@@ -170,9 +150,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 dist2View.setText(dist);
 
                 distTraversed = Math.abs(distFinal - distInit);
-                String distTrav = Double.toString(distTraversed);
+                //String distTrav = Double.toString(distTraversed);
+                String distTrav = String.format("%.3f", distTraversed);
                 dxView.setText(distTrav);
-
             }
         });
 
@@ -193,24 +173,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
                 String distTrav = Double.toString(distTraversed);
                 dxView.setText(distTrav);
-
-                //checkDistance = false;
-                //checkHeight = true;
-                //heightOutput.setTypeface(null, Typeface.NORMAL);
-                //heightButton.setVisibility(View.VISIBLE);
             }
         });
-
-        /*
-        heightButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                checkHeight = false;
-            }
-        });
-        */
 
         resetTimeBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -222,14 +186,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 dt =  0;
                 String time = Double.toString(dt);
                 dtView.setText(time);
-
-                /*
-                checkDistance = true;
-                checkHeight = false;
-                heightOutput.setTypeface(null, Typeface.ITALIC);
-                heightOutput.setText("Set Distance");
-                heightButton.setVisibility(View.INVISIBLE);
-                */
             }
         });
 
@@ -368,22 +324,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         this.z = z / norm;
     }
 
-    /*
-    private double getSpeed()
-    {
-        double speed = 0;
-
-        currentPosition = distance;
-
-        if(refreshRate != 0 && previousPosition != 0)
-            speed = ((currentPosition - previousPosition)/refreshRate)*1000;
-
-        previousPosition = currentPosition;
-
-        return Math.abs(speed);
-    }
-    */
-
     private double getDistance()
     {
         double inclination = Math.toDegrees(Math.acos(z));
@@ -401,31 +341,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         return Math.round(((phoneHeight * tanAngle) - 0.1) * 100.0) / 100.0;
     }
-
-    /*
-    private double getHeight()
-    {
-
-        double angle = Math.toDegrees(Math.acos(z));
-//        double angle;
-
-//        angle = Math.round((inclination) * 10.0) / 10.0;
-        double a, c, A, B, C;
-
-        a = Math.sqrt((Math.pow(phoneHeight, 2) + Math.pow(distance,2)));
-
-        C = ((angle - distanceAngle) > 0) ? round((angle - distanceAngle), 2) : 0;
-        B = 180 - 90 - distanceAngle;
-        A = 180 - B - C;
-
-        c = (a * (Math.sin(Math.toRadians(C)))) / Math.sin(Math.toRadians(A));
-        //tv.setText("a: " + round(a, 2) + "\nA: " + round(A,2) + "\nB: " + round(B,2) + "\nC: " + round(C,2) + "\nc: " + round(c,2));
-
-        heightAngle = C;
-
-        return round(c,2);
-    }
-    */
 
 
     private double round(double d, int decimals)
