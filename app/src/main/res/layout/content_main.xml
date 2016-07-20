@@ -85,7 +85,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"/>
-
+<!--
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,6 +94,7 @@
                 android:id="@+id/speedOutput"
                 android:layout_below="@+id/STATICSPEEDLABEL"
                 android:layout_centerHorizontal="true" />
+-->
 
             <Button
                 android:layout_width="wrap_content"

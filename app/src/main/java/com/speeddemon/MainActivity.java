@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
 
-        speedOutput = (TextView) findViewById(R.id.speedOutput);
+        // speedOutput = (TextView) findViewById(R.id.speedOutput);
         distanceOutput = (TextView) findViewById(R.id.distanceOutput);
         distanceButton = (Button) findViewById(R.id.distanceButton);
         heightOutput = (TextView) findViewById(R.id.heightOutput);
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
                 }
 
-                speedOutput.setText(getSpeed() + " m/s");
+                //speedOutput.setText(getSpeed() + " m/s");
 
             }
 
@@ -342,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         this.z = z / norm;
     }
 
+    /*
     private double getSpeed()
     {
         double speed = 0;
@@ -355,7 +356,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         return Math.abs(speed);
     }
-
+    */
 
     private double getDistance()
     {
