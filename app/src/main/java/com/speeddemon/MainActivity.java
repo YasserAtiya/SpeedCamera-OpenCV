@@ -1,7 +1,5 @@
 package com.speeddemon;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -34,17 +31,39 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat edge;
     Sensor accelerometer;
     SensorManager sm;
-    TextView distanceOutput, heightOutput, distanceAngleOutput, heightAngleOutput, speedOutput;
+    TextView distanceOutput, distanceAngleOutput, initialTimeOutput;
     double phoneHeight = 1.22;
-    double x, y, z, distance, height, distanceAngle, heightAngle, previousPosition, currentPosition;
-    Button distanceButton, heightButton, resetButton;
+    double x, y, z, distance, distanceAngle;
     SeekBar thresholdBar;
     int threshold;
     boolean checkDistance = true;
-    boolean checkHeight = false;
-    TextView tv;
     long refreshRate, previousTime;
 
+
+    // Time objects
+    Button time1Button;
+    Button time2Button;
+    Button resetTimeBtn;
+    TextView dtView;
+    int timeInit = 0;
+    int timeFinal = 0;
+    double dt = 0.0;
+
+    // Distance objects
+    Button dist1Button;
+    Button dist2Button;
+    Button resetDistBtn;
+    double distInit = 0.0;
+    double distFinal = 0.0;
+    TextView dist1View;
+    TextView dist2View;
+    double distTraversed;
+    TextView dxView;
+
+    // Speed objects
+    double speed = 0.0;
+    TextView speedView;
+    Button speedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,16 +75,28 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
 
-        speedOutput = (TextView) findViewById(R.id.speedOutput);
         distanceOutput = (TextView) findViewById(R.id.distanceOutput);
-        distanceButton = (Button) findViewById(R.id.distanceButton);
-        heightOutput = (TextView) findViewById(R.id.heightOutput);
-        heightButton = (Button) findViewById(R.id.heightButton);
-        resetButton = (Button) findViewById(R.id.resetButton);
         thresholdBar = (SeekBar) findViewById(R.id.thresholdBar);
-        heightAngleOutput = (TextView) findViewById(R.id.heightAngle);
         distanceAngleOutput = (TextView) findViewById(R.id.distanceAngle);
-        tv = (TextView) findViewById(R.id.textView4);
+
+        // Time Objects
+        time1Button = (Button) findViewById(R.id.btnTime1);
+        time2Button = (Button) findViewById(R.id.btnTime2);
+        resetTimeBtn = (Button) findViewById(R.id.btnResetTime);
+        initialTimeOutput = (TextView) findViewById(R.id.initialTime);
+        dtView = (TextView) findViewById(R.id.dtView);
+
+        // Dist Objects
+        dist1View = (TextView) findViewById(R.id.dist1View);
+        dist2View = (TextView) findViewById(R.id.dist2View);
+        dist1Button = (Button) findViewById(R.id.btnDist1);
+        dist2Button = (Button) findViewById(R.id.btnDist2);
+        resetDistBtn = (Button) findViewById(R.id.btnResetDist);
+        dxView = (TextView) findViewById(R.id.dxView);
+
+        // Speed Objects
+        speedView = (TextView) findViewById(R.id.spdTxtView);
+        speedButton = (Button) findViewById(R.id.btnGetSpeed);
 
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -89,15 +120,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                     distanceOutput.setText(distance + "m");
                     distanceAngleOutput.setText("Angle: " + distanceAngle);
                 }
-                if(checkHeight)
-                {
-                    height = getHeight();
-                    heightOutput.setText(height + "m");
-                    heightAngleOutput.setText("Angle: " + heightAngle);
-
-                }
-
-                speedOutput.setText(getSpeed() + " m/s");
 
             }
 
@@ -108,37 +130,101 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             }
         }, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
-        distanceButton.setOnClickListener(new View.OnClickListener()
-        {
+
+
+        // Distance button events
+        dist1Button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                checkDistance = false;
-                checkHeight = true;
-                heightOutput.setTypeface(null, Typeface.NORMAL);
-                heightButton.setVisibility(View.VISIBLE);
+            public void onClick(View v) {
+                distInit = getDistance();
+                String dist = Double.toString(distInit);
+                dist1View.setText(dist);
             }
         });
 
-        heightButton.setOnClickListener(new View.OnClickListener()
-        {
+        dist2Button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                checkHeight = false;
+            public void onClick(View v) {
+                distFinal = getDistance();
+                String dist = Double.toString(distFinal);
+                dist2View.setText(dist);
+
+                distTraversed = Math.abs(distFinal - distInit);
+                //String distTrav = Double.toString(distTraversed);
+                String distTrav = String.format("%.3f", distTraversed);
+                dxView.setText(distTrav);
             }
         });
 
-        resetButton.setOnClickListener(new View.OnClickListener()
+        resetDistBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                checkDistance = true;
-                checkHeight = false;
-                heightOutput.setTypeface(null, Typeface.ITALIC);
-                heightOutput.setText("Set Distance");
-                heightButton.setVisibility(View.INVISIBLE);
+                distInit = 0.0;
+                distFinal = 0.0;
+                distTraversed = 0.0;
+
+                String distInitial = Double.toString(distInit);
+                dist1View.setText(distInitial);
+
+                String distFin = Double.toString(distFinal);
+                dist2View.setText(distFin);
+
+                String distTrav = Double.toString(distTraversed);
+                dxView.setText(distTrav);
+            }
+        });
+
+        resetTimeBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                timeInit = 0;
+                timeFinal = 0;
+                dt =  0;
+                String time = Double.toString(dt);
+                dtView.setText(time);
+            }
+        });
+
+        // Time button events
+        time1Button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                timeInit = (int) System.currentTimeMillis();
+                String time = Integer.toString(timeInit);
+                initialTimeOutput.setText(time);
+            }
+        });
+
+        time2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timeFinal = (int) System.currentTimeMillis();
+                dt =  ( (double) timeFinal - timeInit ) / 1000;
+                String time = Double.toString(dt);
+                dtView.setText(time);
+            }
+        });
+
+        // Speed button events
+        speedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (dt > 0.001 && distTraversed > 0.01)
+                {
+                    speed = ( distTraversed / dt );
+                }
+
+                // String speedString = Double.toString(speed);
+                String speedString = String.format("%.3f", speed);
+                speedView.setText(speedString);
             }
         });
 
@@ -238,21 +324,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         this.z = z / norm;
     }
 
-    private double getSpeed()
-    {
-        double speed = 0;
-
-        currentPosition = distance;
-
-        if(refreshRate != 0 && previousPosition != 0)
-            speed = ((currentPosition - previousPosition)/refreshRate)*1000;
-
-        previousPosition = currentPosition;
-
-        return Math.abs(speed);
-    }
-
-
     private double getDistance()
     {
         double inclination = Math.toDegrees(Math.acos(z));
@@ -271,28 +342,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         return Math.round(((phoneHeight * tanAngle) - 0.1) * 100.0) / 100.0;
     }
 
-    private double getHeight()
-    {
-
-        double angle = Math.toDegrees(Math.acos(z));
-//        double angle;
-
-//        angle = Math.round((inclination) * 10.0) / 10.0;
-        double a, c, A, B, C;
-
-        a = Math.sqrt((Math.pow(phoneHeight, 2) + Math.pow(distance,2)));
-
-        C = ((angle - distanceAngle) > 0) ? round((angle - distanceAngle), 2) : 0;
-        B = 180 - 90 - distanceAngle;
-        A = 180 - B - C;
-
-        c = (a * (Math.sin(Math.toRadians(C)))) / Math.sin(Math.toRadians(A));
-        tv.setText("a: " + round(a, 2) + "\nA: " + round(A,2) + "\nB: " + round(B,2) + "\nC: " + round(C,2) + "\nc: " + round(c,2));
-
-        heightAngle = C;
-
-        return round(c,2);
-    }
 
     private double round(double d, int decimals)
     {
