@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     private Mat edge;
     Sensor accelerometer;
     SensorManager sm;
-    TextView distanceOutput, heightOutput, distanceAngleOutput, heightAngleOutput, speedOutput;
+    TextView distanceOutput, heightOutput, distanceAngleOutput, initialTimeOutput, speedOutput;
     double phoneHeight = 1.22;
     double x, y, z, distance, height, distanceAngle, heightAngle, previousPosition, currentPosition;
     Button distanceButton, heightButton;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         //heightButton = (Button) findViewById(R.id.heightButton);
         resetTimeBtn = (Button) findViewById(R.id.btnResetTime);
         thresholdBar = (SeekBar) findViewById(R.id.thresholdBar);
-        heightAngleOutput = (TextView) findViewById(R.id.initialTime);
+        initialTimeOutput = (TextView) findViewById(R.id.initialTime);
         distanceAngleOutput = (TextView) findViewById(R.id.distanceAngle);
         //tv = (TextView) findViewById(R.id.textView4);
 
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             {
                 timeInit = (int) System.currentTimeMillis();
                 String time = Integer.toString(timeInit);
-                heightAngleOutput.setText(time);
+                initialTimeOutput.setText(time);
             }
         });
 
