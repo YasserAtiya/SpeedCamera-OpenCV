@@ -81,20 +81,10 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Small Text"
                 android:id="@+id/textView4"
-                android:layout_below="@+id/distanceAngle"
+                android:layout_below="@+id/btnDist2"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Speed"
-                android:id="@+id/STATICSPEEDLABEL"
-                android:layout_below="@+id/textView4"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,6 +95,50 @@
                 android:layout_below="@+id/STATICSPEEDLABEL"
                 android:layout_centerHorizontal="true" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Dist 1"
+                android:id="@+id/btnDist1"
+                android:layout_below="@+id/distanceAngle"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="false"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/dist1View" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Dist 2"
+                android:id="@+id/btnDist2"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="false"
+                android:layout_centerInParent="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:id="@+id/dist1View"
+                android:layout_above="@+id/btnDist2"
+                android:gravity="center_horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:id="@+id/dist2View"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/btnDist2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
         </RelativeLayout>
 
         <LinearLayout
@@ -113,7 +147,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/distanceButton"
             android:layout_alignParentStart="false"
-            android:layout_alignParentLeft="false"
             android:layout_toLeftOf="@+id/edgeSwitch"
             android:layout_toStartOf="@+id/edgeSwitch"
             android:layout_weight="0.595">
@@ -126,7 +159,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="231dp">
 
                 <org.opencv.android.JavaCameraView
                     android:layout_width="fill_parent"
@@ -151,6 +184,39 @@
                     android:src="@mipmap/cross_hair"/>
             </RelativeLayout>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calculate Speed"
+                    android:id="@+id/btnGetSpeed"
+                    android:layout_below="@+id/btnResetTime"
+                    android:layout_alignRight="@+id/btnResetTime"
+                    android:layout_alignEnd="@+id/btnResetTime" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Speed:"
+                    android:id="@+id/STATICSPEEDLABEL"
+                    android:layout_below="@+id/textView4"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="0.0"
+                    android:id="@+id/spdTxtView"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <RelativeLayout
@@ -159,16 +225,6 @@
             android:layout_height="match_parent"
             android:layout_weight="0.2025"
             android:gravity="bottom|right">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Edge Detect"
-                android:id="@+id/textView"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="25dp"/>
 
             <Switch
                 android:layout_width="wrap_content"
@@ -181,14 +237,15 @@
                 android:checked="false"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Height"
+                android:text="Time"
                 android:id="@+id/textView3"
                 android:layout_alignParentTop="true"
                 android:layout_alignRight="@+id/edgeSwitch"
-                android:layout_alignEnd="@+id/edgeSwitch"/>
+                android:layout_alignEnd="@+id/edgeSwitch"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -214,12 +271,48 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reset"
-                android:id="@+id/resetButton"
+                android:text="Reset Time"
+                android:id="@+id/btnResetTime"
                 android:textSize="10dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"/>
+                android:layout_below="@+id/dt"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Time 1"
+                android:id="@+id/btnTime1"
+                android:layout_below="@+id/heightAngle"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Time 2"
+                android:id="@+id/btnTime2"
+                android:layout_below="@+id/btnTime1"
+                android:layout_alignLeft="@+id/btnTime1"
+                android:layout_alignStart="@+id/btnTime1" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Time Elapsed:"
+                android:id="@+id/changeTimeMsg"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/btnTime2"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="dt"
+                android:id="@+id/dt"
+                android:layout_below="@+id/changeTimeMsg"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center_horizontal"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
