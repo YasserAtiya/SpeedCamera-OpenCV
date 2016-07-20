@@ -37,8 +37,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set Distance"
-                android:id="@+id/distanceButton"
+                android:text="Reset Dist"
+                android:id="@+id/btnResetDist"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:textSize="10dp"/>
@@ -150,7 +150,7 @@
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/distanceButton"
+            android:layout_toRightOf="@+id/btnResetDist"
             android:layout_alignParentStart="false"
             android:layout_toLeftOf="@+id/edgeSwitch"
             android:layout_toStartOf="@+id/edgeSwitch"

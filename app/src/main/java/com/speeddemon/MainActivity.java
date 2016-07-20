@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     // Distance objects
     Button dist1Button;
     Button dist2Button;
+    Button resetDistBtn;
     double distInit = 0.0;
     double distFinal = 0.0;
     TextView dist1View;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         // speedOutput = (TextView) findViewById(R.id.speedOutput);
         distanceOutput = (TextView) findViewById(R.id.distanceOutput);
-        distanceButton = (Button) findViewById(R.id.distanceButton);
+        //distanceButton = (Button) findViewById(R.id.btnResetDist);
         //heightOutput = (TextView) findViewById(R.id.heightOutput);
         //heightButton = (Button) findViewById(R.id.heightButton);
         resetTimeBtn = (Button) findViewById(R.id.btnResetTime);
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         dist2View = (TextView) findViewById(R.id.dist2View);
         dist1Button = (Button) findViewById(R.id.btnDist1);
         dist2Button = (Button) findViewById(R.id.btnDist2);
+        resetDistBtn = (Button) findViewById(R.id.btnResetDist);
         dxView = (TextView) findViewById(R.id.dxView);
 
         // Speed Objects
@@ -174,11 +176,23 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             }
         });
 
-        distanceButton.setOnClickListener(new View.OnClickListener()
+        resetDistBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                distInit = 0.0;
+                distFinal = 0.0;
+                distTraversed = 0.0;
+
+                String distInitial = Double.toString(distInit);
+                dist1View.setText(distInitial);
+
+                String distFin = Double.toString(distFinal);
+                dist2View.setText(distFin);
+
+                String distTrav = Double.toString(distTraversed);
+                dxView.setText(distTrav);
 
                 //checkDistance = false;
                 //checkHeight = true;
