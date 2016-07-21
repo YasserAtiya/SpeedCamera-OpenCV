@@ -13,4 +13,21 @@
         7. Hit calculate speed and you will be shown speed of obj between landmarks.\n
     </string>
     <string name="done_button_text">DONE</string>
+    <string name="distance_label">Distance</string>
+    <string name="reset_dist1_btn">Reset Dist</string>
+    <string name="distance_output">3.56m</string>
+    <string name="distance_angle">Angle:</string>
+    <string name="dx_view_label">dx</string>
+    <string name="set_dist1_btn">Set Dist 1</string>
+    <string name="set_dist2_label">Set Dist 2</string>
+    <string name="dist1_view">0.0</string>
+    <string name="dist2_view">0.0</string>
+    <string name="time_textview">Time</string>
+    <string name="intial_time_textview">Intial Time</string>
+    <string name="reset_time_btn">Reset Time</string>
+    <string name="set_time1_btn">Set Time 1</string>
+    <string name="set_time2_btn">Set Time 2</string>
+    <string name="time_elapsed_view">Time Elapsed:</string>
+    <string name="dt_view">dt</string>
+    <string name="calculate_speed_btn">Calculate Speed</string>
 </resources>
