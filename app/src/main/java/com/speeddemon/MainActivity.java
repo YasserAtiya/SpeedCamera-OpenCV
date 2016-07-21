@@ -1,5 +1,6 @@
 package com.speeddemon;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -9,11 +10,13 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -36,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     TextView distanceOutput, distanceAngleOutput, initialTimeOutput;
     double phoneHeight = 1.22;
     double x, y, z, distance, distanceAngle;
-    SeekBar thresholdBar;
-    int threshold;
+    //SeekBar thresholdBar;
+    //int threshold;
     boolean checkDistance = true;
     long refreshRate, previousTime;
 
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mOpenCvCameraView.setCvCameraViewListener(this);
 
         distanceOutput = (TextView) findViewById(R.id.distanceOutput);
-        thresholdBar = (SeekBar) findViewById(R.id.thresholdBar);
+        //thresholdBar = (SeekBar) findViewById(R.id.thresholdBar);
         distanceAngleOutput = (TextView) findViewById(R.id.distanceAngle);
 
         // Time Objects
@@ -237,7 +240,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         instructionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showInstructions(v);
+                //showInstructions(v);
+                showChangeLangDialog();
             }
         });
     }
@@ -282,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame)
     {
-        threshold = thresholdBar.getProgress();
+        //threshold = thresholdBar.getProgress();
         edge = inputFrame.rgba();
 //        if(((Switch) findViewById(R.id.edgeSwitch)).isChecked())
 //            Canny(edge, edge,threshold , threshold*3);
@@ -315,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             {
                 case LoaderCallbackInterface.SUCCESS:
                 {
-                    Log.i(TAG, "OpenCV loaded successfully");
+                    Log.i(TAG, "Speed Demon loaded successfully");
                     mOpenCvCameraView.enableView();
                     break;
                 }
@@ -368,19 +372,23 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         }
     }
 
-    public void showInstructions(View view) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle(R.string.instructions_title);
-            alert.setMessage(R.string.instructions_message);
+    public void showChangeLangDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
+        dialogBuilder.setView(dialogView);
 
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        final TextView customDialogTextView = (TextView) dialogView.findViewById(R.id.instructions_textView);
+
+        dialogBuilder.setTitle(R.string.instructions_title);
+        dialogBuilder.setPositiveButton(R.string.done_button_text, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                //Close the dialog. No action needed.
+                //Nothing to do here for now.
+                //Can consume/process customDialogTextView here if needed.
             }
         });
-
-        alert.show();
-
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
 }
 
