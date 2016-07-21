@@ -2,14 +2,15 @@
     <string name="app_name">Speed Demon</string>
     <string name="action_settings">Settings</string>
     <string name="instructions_title">Instructions</string>
-    <string name="instructions_message">
-        1. Use app for measuring speed of object coming at, or going away from, the camera.\n
-        2. Hold camera at 1.22 m height.\n
-        3. When obj reaches landmark 1, hit Set Time 1.\n
-        4. When obj reaches landmark 2, hit Set Time 2.\n
-        5. Aim camera at the ground at landmark 1, hit Set Dist 1.\n
-        6. Aim camera at the ground at landmark 2, hit Set Dist 2.\n
-        7. If you mess up, you can reset your numbers.\n
-        8. Hit calculate speed and you will be shown speed of obj between landmarks.\n
+    <string name="instructions">
+        This app will calculate the speed of an object moving towards and away from the camera.\n\n
+        1. Hold camera at 1.22 m height.\n
+        2. When obj reaches landmark 1, hit Set Time 1.\n
+        3. When obj reaches landmark 2, hit Set Time 2.\n
+        4. Aim camera at the ground at landmark 1, hit Set Dist 1.\n
+        5. Aim camera at the ground at landmark 2, hit Set Dist 2.\n
+        6. If you mess up, you can reset your numbers.\n
+        7. Hit calculate speed and you will be shown speed of obj between landmarks.\n
     </string>
+    <string name="done_button_text">DONE</string>
 </resources>
