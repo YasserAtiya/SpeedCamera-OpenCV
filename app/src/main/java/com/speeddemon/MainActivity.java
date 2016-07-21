@@ -1,10 +1,12 @@
 package com.speeddemon;
 
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -57,13 +59,15 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     double distFinal = 0.0;
     TextView dist1View;
     TextView dist2View;
-    double distTraversed;
+    double distTraversed = 0.0;
     TextView dxView;
 
     // Speed objects
     double speed = 0.0;
     TextView speedView;
     Button speedButton;
+
+    Button instructionsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -97,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         // Speed Objects
         speedView = (TextView) findViewById(R.id.spdTxtView);
         speedButton = (Button) findViewById(R.id.btnGetSpeed);
+
+        instructionsButton = (Button) findViewById(R.id.instructionsBtn);
 
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -228,6 +234,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             }
         });
 
+        instructionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInstructions(v);
+            }
+        });
     }
 
     @Override
@@ -272,8 +284,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     {
         threshold = thresholdBar.getProgress();
         edge = inputFrame.rgba();
-        if(((Switch) findViewById(R.id.edgeSwitch)).isChecked())
-            Canny(edge, edge,threshold , threshold*3);
+//        if(((Switch) findViewById(R.id.edgeSwitch)).isChecked())
+//            Canny(edge, edge,threshold , threshold*3);
         return edge;
     }
 
@@ -356,4 +368,19 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         }
     }
 
+    public void showInstructions(View view) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(R.string.instructions_title);
+            alert.setMessage(R.string.instructions_message);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //Close the dialog. No action needed.
+            }
+        });
+
+        alert.show();
+
+    }
 }
+
