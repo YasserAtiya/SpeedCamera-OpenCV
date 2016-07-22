@@ -28,12 +28,13 @@
             android:gravity="bottom">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/distance_label"
                 android:id="@+id/textView2"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -42,28 +43,29 @@
                 android:id="@+id/btnResetDist"
                 android:textSize="10dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/btnDist2"
-                android:layout_alignStart="@+id/btnDist2"/>
+                android:layout_alignStart="@+id/btnDist2" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/distance_output"
                 android:id="@+id/distanceOutput"
                 android:layout_below="@+id/textView2"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:gravity="center_horizontal" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/distance_angle"
                 android:id="@+id/distanceAngle"
                 android:layout_below="@+id/distanceOutput"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:layout_height="wrap_content"
@@ -73,12 +75,12 @@
                 android:layout_below="@+id/dist2View"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="30dp"
-                android:gravity="center_horizontal"
+                android:gravity="center_vertical|center_horizontal"
                 android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/btnResetDist" />
 
             <Button
                 android:layout_height="wrap_content"
@@ -90,9 +92,9 @@
                 android:layout_alignParentRight="false"
                 android:layout_alignParentEnd="false"
                 android:layout_centerHorizontal="true"
-                android:layout_above="@+id/dist1View"
                 android:background="@drawable/custom_blue_button"
-                android:layout_width="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_marginTop="15dp" />
 
             <Button
                 android:layout_height="wrap_content"
@@ -102,19 +104,20 @@
                 android:layout_alignParentStart="false"
                 android:layout_alignParentRight="false"
                 android:layout_alignParentEnd="false"
-                android:layout_centerInParent="true"
                 android:background="@drawable/custom_blue_button"
-                android:layout_width="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/dist1View"
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dist1_view"
                 android:id="@+id/dist1View"
-                android:layout_above="@+id/btnDist2"
                 android:gravity="center_horizontal"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/btnDist1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -267,7 +270,8 @@
                 android:layout_below="@+id/btnTime1"
                 android:layout_alignLeft="@+id/btnTime1"
                 android:layout_alignStart="@+id/btnTime1"
-                android:background="@drawable/custom_blue_button"/>
+                android:background="@drawable/custom_blue_button"
+                android:layout_marginTop="5dp" />
 
             <TextView
                 android:layout_width="fill_parent"
