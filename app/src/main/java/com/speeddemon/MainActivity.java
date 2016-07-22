@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     // Speed objects
     double speed = 0.0;
+    double speedMPH = 0.0;
     TextView speedView;
     Button speedButton;
 
@@ -231,8 +232,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                     speed = ( distTraversed / dt );
                 }
 
-                // String speedString = Double.toString(speed);
-                String speedString = String.format("%.3f", speed);
+                speedMPH = speed * 2.2369;
+                String unitsMPS = "m/s  or ";
+                String unitsMPH = "mph";
+                String speedString =
+                        String.format("%.3f %s %.3f %s", speed, unitsMPS, speedMPH, unitsMPH);
+
                 speedView.setText(speedString);
             }
         });
