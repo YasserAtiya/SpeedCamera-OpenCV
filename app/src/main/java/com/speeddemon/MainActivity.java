@@ -1,3 +1,15 @@
+/*
+*   Speed Demon by Javanaut
+*   Dan Diamond, Trung Nguyen, Yasser Atiya
+*   Summer 2016
+*   Application uses OpenCV to calculate the distance between the camera and two points.
+*   The app has a built in timer that the user then starts upon the measured object
+*   reaching the first point and subsequently stops at the second point.
+*   The app then calculates dx/dt for the velocity of the object.
+*
+*   Skeleton OpenCV function set up by Graham Coulby
+*/
+
 package com.speeddemon;
 
 import android.app.Dialog;
